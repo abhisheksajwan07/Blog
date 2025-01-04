@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-import axios from "axios";
+import axios from "./axiosconfig";
 
 export const UserContext = createContext();
 export const UserContextProvider = ({ children }) => {
@@ -11,20 +11,20 @@ export const UserContextProvider = ({ children }) => {
 
   const fetchBlogPost = async (page = 1) => {
     setLoading(true);
-    const fetchBlogPost = async (page = 1) => {
-      setLoading(true);
-      try {
-        const data = await axiosInstance.get(?page=${page});
-        console.log(data);
-  
-      } catch (err) {
-        console.log("error fetching blog posts", err);
-        setPage(1);
-        setPosts([]);
-        setTotalPages(null);
-      }
-      setLoading(false);
-    };
+    try {
+      const {data} = await axios.get(`?page=${page}`);
+      console.log(data);
+      setPage(data.page);
+      setPosts(data.posts);
+      setTotalPages(data.totalPages);
+    } catch (err) {
+      console.log("error fetching blog posts", err);
+      setPage(1);
+      setPosts([]);
+      setTotalPages(null);
+    }
+    setLoading(false);
+  };
   //   try {
   //     const { data } = await axios.get(`?page=${page}`);
 
