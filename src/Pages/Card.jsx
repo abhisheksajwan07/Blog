@@ -2,7 +2,7 @@ import React from "react";
 
 const Card = ({ post }) => {
   return (
-    <div className="py-3">
+    <div className="py-3 ">
       <p className="text-2xl font-bold">{post.title}</p>
       <p className="text-sm mt-[4px] ">
         By<span className="italic ml-1 text-red-600">{post.author}</span> on

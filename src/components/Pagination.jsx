@@ -4,8 +4,8 @@ import { UserContext } from "../Utils/UserContext";
 const Pagination = () => {
   const { page, handlePageChange, totalPages } = useContext(UserContext);
   return (
-    <div className="flex max-w-[650px] mx-auto py-2  w-full fixed bottom-0 bg-white ">
-      <div className="flex flex-row justify-between items-center">
+    <div className="flex justify-center items-center w-full border">
+      <div className="flex justify-between items-center  py-3  max-w-[650px] w-full  ">
         <div className="flex gap-x-3">
           {page > 1 && (
             <button
@@ -24,7 +24,7 @@ const Pagination = () => {
             </button>
           )}
         </div>
-        <p>
+        <p className="font-bold text-sm">
           Page {page} of {totalPages}{" "}
         </p>
       </div>
