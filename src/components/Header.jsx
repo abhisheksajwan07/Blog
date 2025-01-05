@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 const Header = () => {
   return (
-    <div>DEV BLOGS</div>
-  )
-}
+    <header className="border py-4 shadow-md">
+      <h1 className="text-3xl uppercase text-center font-bold">Dev Blogs</h1>
+    </header>
+  );
+};
 
-export default Header
+export default Header;
