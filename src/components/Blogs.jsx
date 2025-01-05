@@ -6,7 +6,7 @@ import Card from "../Pages/Card";
 const Blogs = () => {
   const { posts, loading } = useContext(UserContext);
   return (
-    <div>
+    <div className="max-w-[650px] w-11/12 mx-auto  py-5 flex flex-col gap-y-6">
       {loading ? (
         <Loader />
       ) : posts.length == 0 ? (
