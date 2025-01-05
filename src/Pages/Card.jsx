@@ -1,21 +1,27 @@
-import React from 'react';
+import React from "react";
 
-
-const Card = ({post}) => {
+const Card = ({ post }) => {
   return (
-    <div>
-        <p className="text-md font-bold">{post.title}</p>
-        <p className='text-[1rem]'>By<span>{post.author}</span> on <span>{post.category}</span></p>
-        <p>Posted on {post.date}</p>
-        <p>{post.content}</p>
-        <div>
-          {post.tags.map((tag,index)=>{
-            return <span key={index} className='text-blue-600'>{`#${tag}`}</span>
-          })}
-        </div>
-
+    <div className="py-3">
+      <p className="text-2xl font-bold">{post.title}</p>
+      <p className="text-sm mt-[4px] ">
+        By<span className="italic ml-1 text-red-600">{post.author}</span> on
+        <span className="underline font-bold ml-1">{post.category}</span>
+      </p>
+      <p className="text-sm mt-[4px]">Posted on {post.date}</p>
+      <p className="text-md mt-[14px]">{post.content}</p>
+      <div className="flex gap-x-3 mt-[14px]">
+        {post.tags.map((tag, index) => {
+          return (
+            <span
+              key={index}
+              className="text-blue-600 underline font-bold text-xs mt-[5px]"
+            >{`#${tag}`}</span>
+          );
+        })}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Card
+export default Card;
