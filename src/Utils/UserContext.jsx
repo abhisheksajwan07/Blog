@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 
 import axios from "./axiosconfig";
+import { baseURL } from "../baseURL";
 
 export const UserContext = createContext();
 export const UserContextProvider = ({ children }) => {
@@ -9,25 +10,34 @@ export const UserContextProvider = ({ children }) => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(null);
 
-  const fetchBlogPost = async (page = 1) => {
+  async function fetchBlogPosts(page = 1) {
     setLoading(true);
+    let url = `${baseURL}?page=${page}`;
     try {
-      const {data} = await axios.get(`?page=${page}`);
+      const result = await fetch(url);
+      const data = await result.json();
       console.log(data);
       setPage(data.page);
       setPosts(data.posts);
       setTotalPages(data.totalPages);
-    } catch (err) {
-      console.log("error fetching blog posts", err);
+    } catch (e) {
+      console.log("Error", e);
       setPage(1);
       setPosts([]);
       setTotalPages(null);
     }
     setLoading(false);
+  }
+  const handlePageChange = (page) => {
+    setPage(page);
+    fetchBlogPosts(page);
   };
-  //   try {
-  //     const { data } = await axios.get(`?page=${page}`);
+  
 
+  // const fetchBlogPost = async (page = 1) => {
+  //   setLoading(true);
+  //   try {
+  //     const {data} = await axios.get(`?page=${page}`);
   //     console.log(data);
   //     setPage(data.page);
   //     setPosts(data.posts);
@@ -40,10 +50,14 @@ export const UserContextProvider = ({ children }) => {
   //   }
   //   setLoading(false);
   // };
+  // function handlepage(page){
+  //   setPage(page);
+  //   fetchBlogPost(page);
+  // }
 
-  useEffect(() => {
-    fetchBlogPost();
-  }, [page]);
+  // useEffect(() => {
+  //   fetchBlogPost();
+  // }, []);
   const value = {
     loading,
     setLoading,
@@ -53,6 +67,8 @@ export const UserContextProvider = ({ children }) => {
     setPage,
     totalPages,
     setTotalPages,
+    fetchBlogPosts,
+    handlePageChange,
   };
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 };
