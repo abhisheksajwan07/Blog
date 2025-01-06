@@ -4,7 +4,7 @@ import { UserContext } from "../Utils/UserContext";
 const Pagination = () => {
   const { page, handlePageChange, totalPages } = useContext(UserContext);
   return (
-    <div className="flex justify-center items-center w-full border">
+    <div className="flex justify-center items-center w-full border fixed bottom-0 bg-white">
       <div className="flex justify-between items-center  py-3  max-w-[650px] w-full  ">
         <div className="flex gap-x-3">
           {page > 1 && (
